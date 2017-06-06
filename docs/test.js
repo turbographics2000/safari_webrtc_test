@@ -140,9 +140,9 @@ function dcSetup(conn) {
 
 function getAudioStreamFromFile() {
   var ac = new AudioContext();
-  var asrc = audioCtx.createBufferSource();
+  var asrc = ac.createBufferSource();
   return fetch('nc158853.mp3').then(res => res.arrayBuffer()).catch(audioData => {
-    audioCtx.decodeAudioData(audioData, function (buffer) {
+    ac.decodeAudioData(audioData, function (buffer) {
       asrc.buffer = buffer;
       var streamDest = ac.createMediaStreamDestination();
       asrc.connect(streamDest);
