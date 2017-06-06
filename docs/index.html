@@ -12,33 +12,14 @@
             left: 0;
         }
 
-        .item-container {
-            position: relative;
-            margin: 10px;
-        }
-
-        ul {
-            margin: 5px;
-            list-style: none;
-        }
-
-        li {
-            float: left;
-            width: 100%;
+        .container {
+            height: 170px;
         }
 
         canvas,
         video {
             position: relative;
             margin: 5px;
-        }
-
-        #remoteView {
-            position: absolute;
-            width: 427px;
-            height: 240px;
-            top: 0;
-            left: 460px;
         }
     </style>
 </head>
@@ -51,8 +32,8 @@
         Connect Id: <input type="text" id="callTo">
         <button id="btnStart">Start</button>
     </div>
-    <div id="selfStreamContainer"></div>
-    <div id="remoteStreamContainer"></div>
+    <div id="selfStreamContainer" class="container"></div>
+    <div id="remoteStreamContainer" class="container"></div>
     <div>
         <input id="msgTxt" style="display: none">
     </div>
