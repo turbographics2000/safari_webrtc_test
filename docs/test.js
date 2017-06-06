@@ -114,7 +114,7 @@ function callSetup(call) {
       });
     }
     btnAddAudioStream.onclick = evt => {
-      getAudioStreamFromFile().then(stream => {
+      getAudioFromDevice().then(stream => {
         var call = peer.call(callTo.value, stream);
         btnAddAudioStream.style.display = '';
         callSetup(call);
@@ -155,5 +155,11 @@ function getAudioStreamFromFile() {
     }, function (e) {
       console.log("Error with decoding audio data" + e.err);
     });
+  });
+}
+
+function () {
+  return navigator.mediaDevices.getUserMedia({video:false, audio:true}).then(stream => {
+    return stream;
   });
 }
