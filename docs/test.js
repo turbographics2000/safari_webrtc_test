@@ -52,8 +52,8 @@ function createVideoElm(container, stream) {
     console.log('onloadedmetadata');
     vid.style.width = (vid.videoWidth / vid.videoHeight * 160) + 'px';
     vid.style.height = '160px';
-    container.appendChild(vid);
   }
+  container.appendChild(vid);
   vid.srcObject = stream;
   return vid;
 }
