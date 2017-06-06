@@ -1,3 +1,4 @@
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var selfVideos = [];
 var ctxs = [];
 var ua = navigator.userAgent.toLowerCase();
@@ -15,15 +16,18 @@ function canvasSetup(videoFileName) {
     return new Promise((resolve, reject) => {
       vid.onloadedmetadata = evt => {
         cnv.width = vid.videoWidth;
-        cnv.height = vid.videoHeight; 
+        cnv.height = vid.videoHeight;
+        cnv.style.width = '200px';
+        cnv.style.height = (cnv.height / cnv.width * 200) + 'px';
+        selfStreamContainer.appendChild(cnv);
         var stream = cnv.captureStream(30);
-        if(!rafId) {
+        if (!rafId) {
           rafId = requestAnimationFrame(drawFrame);
         }
         resolve(stream);
       };
       vid.onended = evt => {
-        if(rafId) {
+        if (rafId) {
           cancelAnimationFrame(rafId);
         }
       }
@@ -55,7 +59,7 @@ peer.on('open', id => {
   myIdDisp.textContent = id;
   btnStart.onclick = evt => {
     var ua = navigator.userAgent.toLowerCase();
-    if(isSafari) {
+    if (isSafari) {
       canvasSetup('sintel.mp4').then(stream => {
         var call = peer.call(callTo.value, stream);
         callSetup(call);
@@ -94,13 +98,24 @@ peer.on('connection', conn => {
 function callSetup(call) {
   call.on('stream', stream => {
     console.log('call on "stream"');
-    remoteView.srcObject = stream;
-    btnAddStream.style.display = '';
+    var vid = document.createElement('video');
+    vid.onloadedmetadata = evt => {
+      vid.style.width = '200px';
+      vid.style.height = (vid.videoHeight / vid.videoWidth * 200) * 'px';
+      remoteStreamContainer.appendChild(vid);
+    }
+    vid.srcObject = stream;
     btnAddStream.onclick = evt => {
       canvasSetup(isSafari ? 'ed_scaled.mp4' : 'tos_scaled.mp4').then(stream => {
         var call = peer.call(callTo.value, stream);
         callSetup(call);
-      }); 
+      });
+    }
+    btnAddAudioStream.onclick = evt => {
+      getAudioStreamFromFile().then(stream => {
+        var call = peer.call(callTo.value, stream);
+        callSetup(call);
+      });
     }
   });
   call.on('close', _ => {
@@ -114,9 +129,28 @@ function dcSetup(conn) {
     console.log(data);
   });
   conn.on('open', _ => {
-    console.log('conn on "open"');
+    console.log('conn(dc) on "open"');
     conn.send('hi!');
     btnStart.style.display = 'none';
   });
 }
 
+
+
+function getAudioStreamFromFile() {
+  var ac = new AudioContext();
+  var asrc = audioCtx.createBufferSource();
+  return fetch('nc158853.mp3').then(res => res.arrayBuffer()).catch(audioData => {
+    audioCtx.decodeAudioData(audioData, function (buffer) {
+      asrc.buffer = buffer;
+      var streamDest = ac.createMediaStreamDestination();
+      asrc.connect(streamDest);
+      streamDest.connect(ac.destination);
+      asrc.loop = true;
+      asrc.start();
+      return streamDest.stream;
+    }, function (e) {
+      console.log("Error with decoding audio data" + e.err);
+    });
+  });
+}

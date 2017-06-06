@@ -12,14 +12,9 @@
             left: 0;
         }
 
-        #cnv {
-            position: absolute;
-            width: 427px;
-            height: 240px;
-            top: 0;
-            left: 0;
-            border: 1px solid black;
-            background: white;
+        canvas {
+            position: relative;
+            margin: 10px;
         }
 
         #remoteView {
@@ -40,12 +35,11 @@
         Connect Id: <input type="text" id="callTo">
         <button id="btnStart">Start</button>
         <button id="btnAddStream" style="display: none">Add Stream(一つのみ)</button>
+        <button id="btnAddAudioStream" style="display: none">Add Audio Stream(一つのみ)</button>
     </div>
-    <div style="position: relative">
-        <video id="selfView" autoplay muted></video>
-        <canvas id="cnv" width="427" height="240"></canvas>
-        <video id="remoteView" autoplay></video>
-        <video id="remoteView2" autoplay></video>
+    <div id="selfStreamContainer">
+    </div>
+    <div id="remoteStreamContainer">
     </div>
     <div>
         <input id="msgTxt">
