@@ -6,6 +6,7 @@ peer.on('open', id => {
   btnStart.onclick = evt => {
     webCamSetup(selfStreamContainer).then(stream => {
       var call = peer.call(callTo.value, stream);
+      callSetup(call);
     });
   }
 });
