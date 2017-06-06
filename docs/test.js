@@ -104,7 +104,7 @@ function callSetup(call) {
     var vid = document.createElement('video');
     vid.onloadedmetadata = evt => {
       vid.style.width = '200px';
-      vid.style.height = (vid.videoHeight / vid.videoWidth * 200) * 'px';
+      vid.style.height = (vid.videoHeight / vid.videoWidth * 200) + 'px';
       remoteStreamContainer.appendChild(vid);
     }
     vid.srcObject = stream;
