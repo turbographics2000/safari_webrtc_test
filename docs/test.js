@@ -13,7 +13,7 @@ peer.on('open', id => {
 
 peer.on('call', call => {
   console.log('peer on "call"');
-  webCamSetup(remoteStreamContainer).then(stream => {
+  webCamSetup(selfStreamContainer).then(stream => {
     call.answer(stream);
   });
   callSetup(call);
@@ -58,8 +58,8 @@ function createVideoElm(container, stream) {
   return vid;
 }
 
-function webCamSetup(container, video, audio) {
-  return navigator.mediaDevices.getUserMedia({ video: video, audio: audio }).then(stream => {
+function webCamSetup(container, video = true, audio = true) {
+  return navigator.mediaDevices.getUserMedia({ video, audio }).then(stream => {
     createVideoElm(container, stream);
     return stream;
   }).catch(ex => console.log('getUserMedia error.', ex));
