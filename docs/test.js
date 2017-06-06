@@ -58,7 +58,7 @@ function createVideoElm(container, stream) {
 }
 
 function webCamSetup(container, video, audio) {
-  return navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+  return navigator.mediaDevices.getUserMedia({ video: video, audio: audio }).then(stream => {
     createVideoElm(container, stream);
     return stream;
   }).catch(ex => console.log('getUserMedia error.', ex));
