@@ -158,8 +158,8 @@ function getAudioStreamFromFile() {
   });
 }
 
-function () {
-  return navigator.mediaDevices.getUserMedia({video:false, audio:true}).then(stream => {
+function getAudioFromDevice() {
+  return navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
     return stream;
   });
 }
