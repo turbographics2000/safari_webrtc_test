@@ -14,7 +14,7 @@ function canvasSetup(videoFileName) {
   return Promise.resolve(video).then(vid => {
     return new Promise((resolve, reject) => {
       vid.onloadedmetadata = evt => {
-        var itemContainer = document.createElement('div');
+        var itemContainer = document.createElement('li');
         itemContainer.className = 'item-container';
         cnv.width = vid.videoWidth;
         cnv.height = vid.videoHeight;
