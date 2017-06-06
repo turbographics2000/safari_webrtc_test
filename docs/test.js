@@ -16,6 +16,7 @@ function canvasSetup(videoFileName) {
       vid.onloadedmetadata = evt => {
         var itemContainer = document.createElement('li');
         itemContainer.className = 'item-container';
+        cnv.style.left = '-200px';
         cnv.width = vid.videoWidth;
         cnv.height = vid.videoHeight;
         vid.style.width = cnv.style.width = '200px';
