@@ -104,9 +104,12 @@ function callSetup(call) {
     console.log('call on "stream"');
     var vid = document.createElement('video');
     vid.onloadedmetadata = evt => {
+      var itemContainer = document.createElement('li');
+      itemContainer.className = 'item-container';
       vid.style.width = '200px';
       vid.style.height = (vid.videoHeight / vid.videoWidth * 200) + 'px';
-      remoteStreamContainer.appendChild(vid);
+      itemContainer.appendChild(vid);
+      remoteStreamContainer.appendChild(itemContainer);
     }
     vid.srcObject = stream;
     btnAddStream.style.display = btnAddAudioStream.style.display = '';
