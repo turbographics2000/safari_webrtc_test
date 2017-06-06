@@ -20,7 +20,6 @@
         ul {
             margin: 5px;
             list-style: none;
-            width: 100%;
         }
 
         li {
@@ -31,6 +30,7 @@
         canvas,
         video {
             position: relative;
+            margin: 5px;
         }
 
         #remoteView {
@@ -50,11 +50,9 @@
     <div>
         Connect Id: <input type="text" id="callTo">
         <button id="btnStart">Start</button>
-        <button id="btnAddStream" style="display: none">Add Stream(一つのみ)</button>
-        <button id="btnAddAudioStream" style="display: none">Add Audio Stream(一つのみ)</button>
     </div>
-    <ul id="selfStreamContainer"></ul>
-    <ul id="remoteStreamContainer"></ul>
+    <div id="selfStreamContainer"></div>
+    <div id="remoteStreamContainer"></div>
     <div>
         <input id="msgTxt" style="display: none">
     </div>
