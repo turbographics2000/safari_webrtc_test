@@ -51,8 +51,7 @@ function createVideoElm(container, stream) {
   vid.onloadeddata = evt => {
     vid.style.width = (vid.videoWidth / vid.videoHeight * 160) + 'px';
     vid.style.height = '160px';
-    conte.appendChild(vid);
-    call.answer(stream);
+    container.appendChild(vid);
   }
   vid.srcObject = stream;
   return vid;
