@@ -109,12 +109,14 @@ function callSetup(call) {
     btnAddStream.onclick = evt => {
       canvasSetup(isSafari ? 'ed_scaled.mp4' : 'tos_scaled.mp4').then(stream => {
         var call = peer.call(callTo.value, stream);
+        btnAddStream.style.display = '';
         callSetup(call);
       });
     }
     btnAddAudioStream.onclick = evt => {
       getAudioStreamFromFile().then(stream => {
         var call = peer.call(callTo.value, stream);
+        btnAddAudioStream.style.display = '';
         callSetup(call);
       });
     }
