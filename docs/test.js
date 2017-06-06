@@ -48,6 +48,7 @@ function dcSetup(conn) {
 
 function createVideoElm(container, stream) {
   var vid = document.createElement('video');
+  vid.muted = true;
   vid.autoplay = true;
   vid.onloadedmetadata = function(evt) {
     console.log('onloadedmetadata');
