@@ -15,14 +15,14 @@ function canvasSetup(videoFileName) {
     return new Promise((resolve, reject) => {
       vid.onloadedmetadata = evt => {
         var itemContainer = document.createElement('div');
-        div.className = 'item-container';
+        itemContainer.className = 'item-container';
         cnv.width = vid.videoWidth;
         cnv.height = vid.videoHeight;
         vid.style.width = cnv.style.width = '200px';
         vid.style.height = cnv.style.height = (cnv.height / cnv.width * 200) + 'px';
         itemContainer.appendChild(vid);
         itemContainer.appendChild(cnv);
-        selfStreamContainer.appendChild(cnv);
+        selfStreamContainer.appendChild(itemContainer);
         var stream = cnv.captureStream(30);
         if (!rafId) {
           rafId = requestAnimationFrame(drawFrame);
