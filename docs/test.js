@@ -48,11 +48,12 @@ function dcSetup(conn) {
 
 function createVideoElm(container, stream) {
   var vid = document.createElement('video');
-  vid.onloadedmetadata = evt => {
+  vid.onloadedmetadata = function(evt) {
     console.log('onloadedmetadata');
-    vid.style.width = (vid.videoWidth / vid.videoHeight * 160) + 'px';
-    vid.style.height = '160px';
+    this.style.width = (this.videoWidth / this.videoHeight * 160) + 'px';
+    this.style.height = '160px';
     container.appendChild(vid);
+    this.play();
   }
   vid.srcObject = stream;
   return vid;
