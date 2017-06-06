@@ -14,7 +14,6 @@ function canvasSetup(videoFileName) {
   return Promise.resolve(video).then(vid => {
     return new Promise((resolve, reject) => {
       vid.onloadedmetadata = evt => {
-        vid.play();
         cnv.width = vid.videoWidth;
         cnv.height = vid.videoHeight;
         cnv.style.width = '200px';
