@@ -1,5 +1,4 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-var selfVideos = [];
 var ctxs = [];
 var ua = navigator.userAgent.toLowerCase();
 var isSafari = ua.includes('mac os x 10_13') && ua.includes('safari') && !ua.includes('chrome');
@@ -7,7 +6,7 @@ var rafId = null;
 
 function canvasSetup(videoFileName) {
   var video = document.createElement('video');
-  selfVideos.push(video);
+  video.autoplay = true;
   var cnv = document.createElement('canvas');
   var ctx = cnv.getContext('2d');
   ctx.targetVideo = video;
