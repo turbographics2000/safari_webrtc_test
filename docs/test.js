@@ -105,6 +105,7 @@ function callSetup(call) {
       remoteStreamContainer.appendChild(vid);
     }
     vid.srcObject = stream;
+    btnAddStream.style.display = btnAddAudioStream.style.display = '';
     btnAddStream.onclick = evt => {
       canvasSetup(isSafari ? 'ed_scaled.mp4' : 'tos_scaled.mp4').then(stream => {
         var call = peer.call(callTo.value, stream);
